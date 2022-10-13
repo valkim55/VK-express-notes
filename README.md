@@ -1,1 +1,3 @@
-# Note Taker Starter Code
+# Welcome to your Notekeeper Express
+<p> It's almost like a gamekeeper on Hogwarts Express but not really.<br>
+Anyways, this is the place where you can store anything from your Karaoke song list to that long text message draft you were meaning to send two months ago.</p>
