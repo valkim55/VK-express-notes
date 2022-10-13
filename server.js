@@ -1,7 +1,7 @@
 // setup a server to accept incoming requests, request express
 const express = require('express');
 // require path to call multiple files across the project
-const path = require('path');
+//const path = require('path');
 // instantiate teh server
 const app = express();
 
@@ -9,17 +9,17 @@ const app = express();
 const {notes} = require('./db/db.json')
 
 // init a body parsing middleware to handle raw json data
-app.use(express.json());
+//app.use(express.json());
 // init a middleware to handle form submissions
-app.use(express.urlencoded({extended:true}));
+//app.use(express.urlencoded({extended:true}));
 // add a middleware to make 'public' directory static
 //app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-app.get('/', (req, res) => {
-    res.send('hi potato');
-    //res.send(notes);
+app.get('/api/notes', (req, res) => {
+    //res.send('hi potato');
+    res.json(notes);
     
 });
 
