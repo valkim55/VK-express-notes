@@ -1,6 +1,5 @@
 const express = require('express');
 const router = require('express').Router();
-//const {getNotes, saveNotes, deleteNotes} = require('../../public/assets/js/index');
 const {notes} = require('../../db/notes.json');
 
 // package that will generate a random id for each new note
