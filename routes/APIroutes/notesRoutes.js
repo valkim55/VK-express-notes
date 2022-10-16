@@ -1,38 +1,52 @@
-const express = require('express');
+//const express = require('express');
 const router = require('express').Router();
-const {notes} = require('../../db/notes.json');
+const notes = require('../../db/notes.json');
+const fs = require('fs');
+const path = require('path');
 
 // package that will generate a random id for each new note
 const uuid = require('uuid');
-
 
 
 router.get('/notes', (req, res) => {
     res.json(notes);
 })
 
-router.get('/:id', (req, res) => {
+router.get('/notes/:id', (req, res) => {
     const foundID = notes.some(note => note.id === parseInt(req.params.id));
     if(foundID) {
         res.json(notes.filter(note => note.id === parseInt(req.params.id)));
     } else {
         res.status(400).json({message: `note with the id ${req.params.id} not found`});
     }
-})
+});
 
-router.post('/notes', (req, res) => {
-    const newNote = {
-        id: uuid.v4(),
-        title: req.body.title,
-        text: req.body.text
-    }
 
-    // check for the note to have both title and text to avoid saving empty notes
+// create a separate function that will generate a new req.body and write it into array of notes in json file
+function addNewNote(body, notesArray) {
+    const newNote = body;
+    notesArray.push(newNote);
+    fs.writeFileSync(path.join(__dirname, '../../db/notes.json'), JSON.stringify(newNote, null, 2));
+    return newNote;   
+};
+
+// could do this in createNewNote but for practicing code separation create another function that will check for title and text to be present
+function validateNewNote(newNote) {
     if(!newNote.title || !newNote.text) {
-        res.status(400).json({message: 'Please save with title and content'});
+        return false
     } else {
-        notes.push(newNote);
-        res.json(notes);
+        return true;;
+    }
+};
+
+// use uuid module to create a random unique id for each newly created req.body
+router.post('/notes', (req, res) => {
+    req.body.id = uuid.v4();
+    if(!validateNewNote(req.body)) {
+        res.status(400).json({message: 'Please save with the proper format: title and content'});
+    } else {
+    const newNote = addNewNote(req.body, notes);
+    res.json(newNote);
     }
 });
 

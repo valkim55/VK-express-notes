@@ -1,6 +1,5 @@
-[
-    {
-        "title":"my note title",
-        "text":"my note text"
-    }
-]
+{
+  "title": "dinner",
+  "text": "make dinner",
+  "id": "6f96216a-afbd-4131-a6ef-abbe875f9380"
+}
