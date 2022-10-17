@@ -21,8 +21,8 @@ router.get('/', (req, res) => {
 function addNewNote(body, notesArray) {
     const note = body;
     notesArray.push(note);
-    fs.writeFileSync(path.join(__dirname, '../../db/notes.json'), JSON.stringify({notes: notesArray}, null, 2));
-    return note;   
+    fs.writeFileSync(path.join(__dirname, '../../db/notes.json'), JSON.stringify({notes: notesArray}, null, 2),);
+    return note;
 };
 
 // could do this in createNewNote but for practicing code separation create another function that will check for title and text to be present
@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
         res.status(400).json({message: 'Please save with the proper format: title and content'});
     } else {
     const note = addNewNote(req.body, notes);
-    return res.json(notes);
+    return res.json({message: 'new note successfully added', notes});
     }
 });
 
@@ -54,7 +54,7 @@ router.delete('/:id', (req, res) => {
         res.status(400).json({message: `note with the parameters ${req.query} not found`})
     } else {
         fs.writeFileSync(path.join(__dirname, '../../db/notes.json'), JSON.stringify({notes: notes.filter(note => note.id !== req.params.id)}, null, 2));
-        res.json({message: 'note successfully deleted', notes: notes.filter(note => note.id !== req.params.id)})
+        return res.json({message: 'note successfully deleted', notes: notes.filter(note => note.id !== req.params.id)})
     }    
 });
 

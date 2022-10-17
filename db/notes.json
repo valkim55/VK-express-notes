@@ -1,14 +1,19 @@
 {
   "notes": [
     {
-      "title": "take meds after breakfast",
-      "text": "take new meds",
-      "id": "860f1181-8265-425c-9e96-1a71c4084106"
-    },
-    {
       "title": "start module 13",
       "text": "plan new module study",
       "id": "2157966a-4aec-4886-ace0-6d4a433fa79c"
+    },
+    {
+      "title": "make lunch",
+      "text": "make lunch at 2pm",
+      "id": "21ab6424-38fd-467b-9c12-47ddda8fdf76"
+    },
+    {
+      "title": "pickup the package",
+      "text": "pickup package after lunch",
+      "id": "1a35b69b-87ac-47d3-932b-32c06eb08c39"
     }
   ]
 }
