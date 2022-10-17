@@ -10,7 +10,7 @@ const uuid = require('uuid');
 
 
 // ========== GET handler ==========
-// returns all notes in notes.json as a response
+// reads and returns all notes in notes.json as a response
 router.get('/', (req, res) => {
     return res.json(notes);
 })
@@ -34,9 +34,9 @@ function validateNewNote(note) {
     }
 };
 
-// use uuid module to create a random unique id for each newly created req.body
+// receives new note, save it to request body and writes into notes.json file
 router.post('/', (req, res) => {
-    req.body.id = uuid.v4();
+    req.body.id = uuid.v4();    // use uuid module to create a random unique id for each newly created req.body
     if(!validateNewNote(req.body)) {
         res.status(400).json({message: 'Please save with the proper format: title and content'});
     } else {
@@ -47,18 +47,15 @@ router.post('/', (req, res) => {
 
 
 // ========== DELETE handler ==========
+// given an id in URL path deletes the note with that ID and returns an updated notes.json
 router.delete('/:id', (req, res) => {
-    
     const deleteNote = notes.find(({id}) => id == req.params.id);
     if(!deleteNote) {
         res.status(400).json({message: `note with the parameters ${req.query} not found`})
     } else {
+        fs.writeFileSync(path.join(__dirname, '../../db/notes.json'), JSON.stringify({notes: notes.filter(note => note.id !== req.params.id)}, null, 2));
         res.json({message: 'note successfully deleted', notes: notes.filter(note => note.id !== req.params.id)})
-    }
-        //: ;
-    // const index = notes.indexOf(deleteNote);
-    // notes.splice(index, 1);
-    
+    }    
 });
 
 module.exports = router;
