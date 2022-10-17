@@ -1,5 +1,19 @@
 {
-  "title": "dinner",
-  "text": "make dinner",
-  "id": "6f96216a-afbd-4131-a6ef-abbe875f9380"
+  "notes": [
+    {
+      "title": "dinner",
+      "text": "make dinner",
+      "id": "6f96216a-afbd-4131-a6ef-abbe875f9380"
+    },
+    {
+      "title": "sleep",
+      "text": "sleep early",
+      "id": "30dff498-29a1-41ed-8a52-39a859be0020"
+    },
+    {
+      "title": "gooooo sleeeeep",
+      "text": "sleep early",
+      "id": "04cd55ef-3c8a-49d4-b1f5-b7b33853c7d7"
+    }
+  ]
 }
