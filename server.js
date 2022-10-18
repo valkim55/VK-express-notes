@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // points at all API routes in APIroutes directory, to perform actions on notes.json 
-app.use('/api/notes', require('./routes/APIroutes/notesRoutes'));
+app.use('/', require('./routes/APIroutes/notesRoutes'));
 
 // points at all routes in HTMLroutes directory for the front end
 app.use('/', require('./routes/HTMLroutes/HTMLroutes'));

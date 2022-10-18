@@ -11,8 +11,8 @@ const uuid = require('uuid');
 
 // ========== GET handler ==========
 // reads and returns all notes in notes.json as a response
-router.get('/', (req, res) => {
-    return res.json(notes);
+router.get('/api/notes', (req, res) => {
+    return res.json({notes});
 })
 
 
@@ -35,7 +35,7 @@ function validateNewNote(note) {
 };
 
 // receives new note, save it to request body and writes into notes.json file
-router.post('/', (req, res) => {
+router.post('/api/note', (req, res) => {
     req.body.id = uuid.v4();    // use uuid module to create a random unique id for each newly created req.body
     if(!validateNewNote(req.body)) {
         res.status(400).json({message: 'Please save with the proper format: title and content'});
@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
 
 // ========== DELETE handler ==========
 // given an id in URL path deletes the note with that ID and returns an updated notes.json
-router.delete('/:id', (req, res) => {
+router.delete('/api/note/:id', (req, res) => {
     const deleteNote = notes.find(({id}) => id == req.params.id);
     if(!deleteNote) {
         res.status(400).json({message: `note with the parameters ${req.query} not found`})
