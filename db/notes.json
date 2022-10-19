@@ -1,3 +1,19 @@
 {
-  "notes": []
+  "notes": [
+    {
+      "title": "new caps",
+      "text": "switch to matcha keycaps",
+      "id": "2a6e84e8-4e18-43db-977e-f7993f324412"
+    },
+    {
+      "title": "mom's painting",
+      "text": "finish mom's painting on weekend",
+      "id": "f06b43aa-ae24-4178-82c9-d3173361a43c"
+    },
+    {
+      "title": "express tutorial youtube",
+      "text": "watch traversy media on yt",
+      "id": "4cfad63e-de1c-4a80-955f-61bb7f2fd051"
+    }
+  ]
 }

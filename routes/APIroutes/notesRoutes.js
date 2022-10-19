@@ -48,10 +48,10 @@ router.post('/api/notes', (req, res) => {
 router.delete('/api/notes/:id', (req, res) => {
     const deleteNote = notes.find(({id}) => id == req.params.id);
     if(deleteNote) {
-        res.json({message: 'note successfully deleted', notes: notes.filter(note => note.id !== req.params.id)});
         fs.writeFileSync(path.join(__dirname, '../../db/notes.json'), JSON.stringify({notes: notes.filter(note => note.id !== req.params.id)}, null, 2));
-        return; 
+        return res.json(notes.filter(note => note.id !== req.params.id)); 
     }  
+    return;
 });
 
 module.exports = router;
