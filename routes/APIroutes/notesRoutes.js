@@ -8,13 +8,11 @@ const path = require('path');
 const uuid = require('uuid');
 
 
-
 // ========== GET handler ==========
 // reads and returns all notes in notes.json as a response
 router.get('/api/notes', (req, res) => {
-    return res.json({notes});
+    return res.json(notes);
 })
-
 
 // ========== POST handler ==========
 // create a separate function that will generate a new req.body and write it into array of notes in json file
@@ -35,26 +33,25 @@ function validateNewNote(note) {
 };
 
 // receives new note, save it to request body and writes into notes.json file
-router.post('/api/note', (req, res) => {
+router.post('/api/notes', (req, res) => {
     req.body.id = uuid.v4();    // use uuid module to create a random unique id for each newly created req.body
     if(!validateNewNote(req.body)) {
         res.status(400).json({message: 'Please save with the proper format: title and content'});
     } else {
-    const note = addNewNote(req.body, notes);
-    return res.json({message: 'new note successfully added', notes});
+    addNewNote(req.body, notes);
+    return res.json(notes);   // took notes out of curly braces
     }
 });
 
-
 // ========== DELETE handler ==========
 // given an id in URL path deletes the note with that ID and returns an updated notes.json
-router.delete('/api/note/:id', (req, res) => {
+router.delete('/api/notes/:id', (req, res) => {
     const deleteNote = notes.find(({id}) => id == req.params.id);
     if(!deleteNote) {
-        res.status(400).json({message: `note with the parameters ${req.query} not found`})
+        res.status(400).json({message: `note with the parameters ${req.params.id} not found`})
     } else {
+        res.json({message: 'note successfully deleted', notes: notes.filter(note => note.id !== req.params.id)});
         fs.writeFileSync(path.join(__dirname, '../../db/notes.json'), JSON.stringify({notes: notes.filter(note => note.id !== req.params.id)}, null, 2));
-        return res.json({message: 'note successfully deleted', notes: notes.filter(note => note.id !== req.params.id)})
     }    
 });
 

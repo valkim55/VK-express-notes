@@ -5,7 +5,7 @@ const path = require('path');
 // instantiate the server
 const app = express();
 // setup a route for the front end to request data from
-const notes = require('./db/notes.json')
+const {notes} = require('./db/notes.json')
 
 
 // init a body parsing middleware to handle raw json data, form submissions and other deeply nested data
